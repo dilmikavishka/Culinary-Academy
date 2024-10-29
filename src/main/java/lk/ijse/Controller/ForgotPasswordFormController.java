@@ -6,22 +6,38 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GetStartFormController {
+public class ForgotPasswordFormController {
 
     @FXML
-    private AnchorPane anpGetStarted;
+    private AnchorPane anp2;
 
     @FXML
-    private JFXButton btnGetStarted;
+    private AnchorPane anpForgotPassword;
 
     @FXML
-    void btnGetStartedOnAction(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) anpGetStarted.getScene().getWindow();
+    private JFXButton btnReset;
+
+    @FXML
+    private JFXButton btnSendOtp;
+
+    @FXML
+    private TextField txtConfirmPassword;
+
+    @FXML
+    private TextField txtNewPassword;
+
+    @FXML
+    private TextField txtOtp;
+
+    @FXML
+    void btnResetOnAction(ActionEvent event) throws IOException {
+        Stage currentStage = (Stage) anpForgotPassword.getScene().getWindow();
         currentStage.close();
 
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/LoginForm.fxml"));
@@ -30,6 +46,10 @@ public class GetStartFormController {
         loginStage.setScene(scene);
         loginStage.setTitle("Login Form");
         loginStage.show();
+    }
+
+    @FXML
+    void btnSendOtpOnAction(ActionEvent event) {
 
     }
 
