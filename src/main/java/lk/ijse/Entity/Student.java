@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +25,7 @@ public class Student {
     private String Student_Phone;
     private String Student_Email;
     private String Student_Address;
+    private LocalDate joinedDate;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<Registration> registrations = new HashSet<>();

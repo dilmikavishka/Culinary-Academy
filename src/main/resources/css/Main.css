@@ -1,0 +1,17 @@
+
+.button{
+    -fx-text-fill: rgb(255, 255, 255);
+}
+
+.button:hover {
+    -fx-animation: button-particles 1s ease infinite;
+    -fx-translate-y: -2px;
+    -fx-text-fill: #FC5A00;
+    /*-fx-border-radius: 10px;*/
+    -fx-border-color:  #FC5A00;
+    -fx-border-width: 1px 0px 2px 0px;
+}
+.anp{
+   /* -fx-background-color: #161718;*/
+    -fx-background-color: linear-gradient(to bottom,  #161718, rgba(56, 56, 56, 0.6));
+}

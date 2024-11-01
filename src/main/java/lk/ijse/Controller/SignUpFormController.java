@@ -10,10 +10,16 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.BO.BoFactory;
+import lk.ijse.BO.custom.UserBO;
+import lk.ijse.DTO.UserDto;
+import lk.ijse.Enum.Role;
 
 import java.io.IOException;
 
 public class SignUpFormController {
+
+    UserBO  userBO = (UserBO) BoFactory.getBoFactory().getBO(BoFactory.BoType.USER);
 
     @FXML
     private AnchorPane anpSignUp;
@@ -38,7 +44,15 @@ public class SignUpFormController {
 
     @FXML
     void btnSignInOnAction(ActionEvent event) {
+        String email = txtUserEmail.getText();
+        String username = txtUserName.getText();
+        String password = txtUserPassword.getText();
+        String role = txtUserRoll.getText();
 
+
+        UserDto userDto = new UserDto(email, username, password, Role.valueOf(role));
+        System.out.println(userDto);
+        userBO.save(userDto);
     }
 
     @FXML

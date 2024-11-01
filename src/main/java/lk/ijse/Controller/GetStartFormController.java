@@ -8,10 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.BO.BoFactory;
+import lk.ijse.BO.custom.UserBO;
 
 import java.io.IOException;
 
 public class GetStartFormController {
+    UserBO userBO = (UserBO) BoFactory.getBoFactory().getBO(BoFactory.BoType.USER);
 
     @FXML
     private AnchorPane anpGetStarted;
@@ -24,12 +27,24 @@ public class GetStartFormController {
         Stage currentStage = (Stage) anpGetStarted.getScene().getWindow();
         currentStage.close();
 
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/LoginForm.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage loginStage = new Stage();
-        loginStage.setScene(scene);
-        loginStage.setTitle("Login Form");
-        loginStage.show();
+        boolean isUsersExsistorNot = userBO.isUsersExsistorNotDB();
+        if (isUsersExsistorNot){
+            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/LoginForm.fxml"));
+            Scene scene = new Scene(rootNode);
+            Stage loginStage = new Stage();
+            loginStage.setScene(scene);
+            loginStage.setTitle("Login Form");
+            loginStage.show();
+        }else {
+            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/SignUpForm.fxml"));
+            Scene scene = new Scene(rootNode);
+            Stage loginStage = new Stage();
+            loginStage.setScene(scene);
+            loginStage.setTitle("Sign Up Form");
+            loginStage.show();
+
+        }
+
 
     }
 

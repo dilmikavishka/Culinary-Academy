@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anpDashBoard" prefHeight="750.0" prefWidth="1020.0" style="-fx-background-color: #28282C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.DashBoardFormController">
+   <children>
+      <Text fill="#e1c38e" layoutX="29.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culinary">
+         <font>
+            <Font name="Arial Black" size="37.0" />
+         </font>
+      </Text>
+      <Text fill="#fdfcfc" layoutX="210.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management System" wrappingWidth="366.44378662109375">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <LineChart fx:id="lineChart" layoutX="23.0" layoutY="333.0" prefHeight="398.0" prefWidth="499.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <AnchorPane layoutX="66.0" layoutY="221.0" prefHeight="86.0" prefWidth="216.0" style="-fx-background-color: #fdfcfc; -fx-background-radius: 5px;">
+         <children>
+            <Text fill="#e1c38e" layoutX="20.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student :">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Label fx:id="lblStudent" layoutX="139.0" layoutY="35.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="313.0" layoutY="220.0" prefHeight="86.0" prefWidth="216.0" style="-fx-background-color: #fdfcfc; -fx-background-radius: 5px;">
+         <children>
+            <Text fill="#e1c38e" layoutX="20.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses :">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Label fx:id="lblCourses" layoutX="143.0" layoutY="35.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="555.0" layoutY="222.0" prefHeight="86.0" prefWidth="216.0" style="-fx-background-color: #fdfcfc; -fx-background-radius: 5px;">
+         <children>
+            <Text fill="#e1c38e" layoutX="20.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration :">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Label fx:id="lblRegistration" layoutX="174.0" layoutY="38.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="67.0" layoutY="110.0" prefHeight="76.0" prefWidth="730.0" style="-fx-background-color: #e1c38e; -fx-background-radius: 20px 0px 20px 0px;" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anpMain1" prefHeight="750.0" prefWidth="1350.0" style="-fx-background-color: #FCFCFC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.MainFormController">
+   <children>
+      <AnchorPane layoutX="-3.0" prefHeight="750.0" prefWidth="333.0" style="-fx-background-color: #28282C;">
+         <children>
+            <JFXButton layoutX="32.0" layoutY="174.0" onAction="#btnUserOnAction" prefHeight="60.0" prefWidth="275.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10; -fx-border-width: 2;" text="Users" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="31.0" layoutY="268.0" onAction="#btnStudentOnAction" prefHeight="60.0" prefWidth="275.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10; -fx-border-width: 2;" text="Student" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="29.0" layoutY="363.0" prefHeight="60.0" prefWidth="275.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10; -fx-border-width: 2;" text="Courses" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="27.0" layoutY="459.0" prefHeight="60.0" prefWidth="275.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10; -fx-border-width: 2;" text="Registration" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="42.0" layoutY="658.0" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #E1C38E; -fx-background-radius: 10;" text="Log Out" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </JFXButton>
+            <Text fx:id="txtDashBoard" fill="#e1c38e" layoutX="97.0" layoutY="54.0" onMouseClicked="#txtDashBoardOnMouseClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="DashBoard">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anpMain2" layoutX="330.0" prefHeight="750.0" prefWidth="1020.0" style="-fx-background-color: #28282C;" />
+   </children>
+</AnchorPane>
