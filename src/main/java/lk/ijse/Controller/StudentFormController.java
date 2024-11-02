@@ -91,11 +91,18 @@ public class StudentFormController implements Initializable {
         System.out.println("saveStudent: " + saveStudent + ", updateStudent: " + updateStudent + ", deleteStudent: " + deleteStudent);
     }
 
+    private void clearFields() {
+        txtStudentId.setText("");
+        txtStudentName.setText("");
+        txtStudentAddress.setText("");
+        txtStudentContact.setText("");
+        txtStudentEmail.setText("");
+
+    }
 
     public void SaveBtnOnaction(ActionEvent actionEvent) {
 //        System.out.println(currentRole+"===========================");
 //        System.out.println("save clicked");
-
         Alert alert;
         if (saveStudent){
             String id = txtStudentId.getText();
@@ -112,10 +119,11 @@ public class StudentFormController implements Initializable {
                 alert.setHeaderText("Student Saved");
                 alert.setContentText("Student Saved");
                 alert.showAndWait();
+                clearFields();
             }
             System.out.println("granted");
             alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Access granted to User section.");
+            alert.setContentText("Access granted to Student section.");
         } else {
             alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Access denied to Student section.");
@@ -177,9 +185,14 @@ public class StudentFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setStudent();
         getAll();
+        generateStudentNextId();
         setCellValueFactory();
+    }
+
+    private void generateStudentNextId() {
+        String id = studentBO.generateNextIdStudent();
+        txtStudentId.setText(String.valueOf(id));
     }
 
     private void setCellValueFactory() {
@@ -199,9 +212,9 @@ public class StudentFormController implements Initializable {
             StudentTm studentTm = new StudentTm(
                     studentDto.getStudent_ID(),
                     studentDto.getStudent_Name(),
+                    studentDto.getStudent_Address(),
                     studentDto.getStudent_Phone(),
                     studentDto.getStudent_Email(),
-                    studentDto.getStudent_Address(),
                     studentDto.getJoinedDate()
             );
             studentTmObservableList.add(studentTm);
@@ -210,22 +223,16 @@ public class StudentFormController implements Initializable {
         }
     }
 
-    private void setStudent() {
-        String id = studentBO.generateNewID();
-        System.out.println(id);
-        txtStudentId.setText(id);
-    }
-
     public void rowOnMouseClicked(MouseEvent mouseEvent) {
         Integer index = TableStudents.getSelectionModel().getSelectedIndex();
         if (index <= -1) {
             return;
         }
         txtStudentId.setText(colStudentId.getCellData(index).toString());
+        txtStudentName.setText(colStudentName.getCellData(index).toString());
         txtStudentAddress.setText(colStudentAddress.getCellData(index).toString());
         txtStudentContact.setText(colStudentContact.getCellData(index).toString());
         txtStudentEmail.setText(colStudentEmail.getCellData(index).toString());
-        txtStudentName.setText(colStudentName.getCellData(index).toString());
         txtStudentJoined.setText(colStudentJoinDate.getCellData(index).toString());
     }
 }

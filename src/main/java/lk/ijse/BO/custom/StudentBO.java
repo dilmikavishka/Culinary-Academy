@@ -6,7 +6,6 @@ import lk.ijse.DTO.StudentDto;
 import java.util.List;
 
 public interface StudentBO extends SuperBO {
-    String generateNewID();
 
     boolean saveStudent(StudentDto studentDto);
 
@@ -15,4 +14,8 @@ public interface StudentBO extends SuperBO {
     boolean updateStudent(StudentDto studentDto);
 
     boolean deleteStudent(String studentId);
+
+    String generateNextIdStudent();
+
+    StudentDto searchStudent(String id);
 }

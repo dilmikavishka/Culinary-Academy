@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.math.BigDecimal;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +22,8 @@ public class Courses {
     @Id
     private String courseId;
     private String courseName;
-    private int duration;
-    private BigDecimal fee;
+    private String duration;
+    private double fee;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private Set<Registration> registrations = new HashSet<>();

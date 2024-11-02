@@ -1,4 +1,4 @@
-package lk.ijse.BO.Impl;
+package lk.ijse.BO.custom.Impl;
 
 import lk.ijse.BO.custom.StudentBO;
 import lk.ijse.DAO.DaoFactory;
@@ -12,19 +12,15 @@ import java.util.List;
 
 public class StudentBoImpl implements StudentBO {
     StudentDAO  studentDAO = (StudentDAO) DaoFactory.getDaoFactory().getDAOType(DaoFactory.DAOTYPE.STUDENT);
-    @Override
-    public String generateNewID() {
-        return studentDAO.generateNewID();
-    }
 
     @Override
     public boolean saveStudent(StudentDto studentDto) {
         return studentDAO.save(new Student(
                 studentDto.getStudent_ID(),
                 studentDto.getStudent_Name(),
+                studentDto.getStudent_Address(),
                 studentDto.getStudent_Phone(),
                 studentDto.getStudent_Email(),
-                studentDto.getStudent_Address(),
                 studentDto.getJoinedDate(),
                 new HashSet<>()
         ));
@@ -35,7 +31,7 @@ public class StudentBoImpl implements StudentBO {
         List<StudentDto> students = new ArrayList<>();
         List<Student> studentList = studentDAO.getAllStudents();
         for (Student student : studentList) {
-            students.add(new StudentDto(student.getStudent_ID(),student.getStudent_Name(),student.getStudent_Phone(),student.getStudent_Email(),student.getStudent_Address(),student.getJoinedDate()));
+            students.add(new StudentDto(student.getStudent_ID(),student.getStudent_Name(),student.getStudent_Address(),student.getStudent_Phone(),student.getStudent_Email(),student.getJoinedDate()));
         }
         return students;
     }
@@ -45,9 +41,9 @@ public class StudentBoImpl implements StudentBO {
         return studentDAO.update(new Student(
                 studentDto.getStudent_ID(),
                 studentDto.getStudent_Name(),
+                studentDto.getStudent_Address(),
                 studentDto.getStudent_Phone(),
                 studentDto.getStudent_Email(),
-                studentDto.getStudent_Address(),
                 studentDto.getJoinedDate(),
                 new HashSet<>()
         ));
@@ -58,6 +54,24 @@ public class StudentBoImpl implements StudentBO {
         Student student = new Student();
         student.setStudent_ID(studentId);
         return studentDAO.deleteStudent(student);
+    }
+
+    @Override
+    public String generateNextIdStudent() {
+        return studentDAO.generateNewID();
+    }
+
+    @Override
+    public StudentDto searchStudent(String id) {
+        Student student = studentDAO.search(id);
+        StudentDto studentDto = new StudentDto();
+        studentDto.setStudent_ID(student.getStudent_ID());
+        studentDto.setStudent_Name(student.getStudent_Name());
+        studentDto.setStudent_Address(student.getStudent_Address());
+        studentDto.setStudent_Phone(student.getStudent_Phone());
+        studentDto.setStudent_Email(student.getStudent_Email());
+        studentDto.setJoinedDate(student.getJoinedDate());
+        return studentDto;
     }
 
 

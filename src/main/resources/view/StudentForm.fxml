@@ -21,17 +21,17 @@
             <TextField fx:id="txtStudentAddress" alignment="CENTER" layoutX="524.0" layoutY="37.0" prefHeight="30.0" prefWidth="215.0" promptText="Student Address" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
             <TextField fx:id="txtStudentContact" alignment="CENTER" layoutX="13.0" layoutY="105.0" prefHeight="30.0" prefWidth="215.0" promptText="Student Contact Number" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
             <TextField fx:id="txtStudentEmail" alignment="CENTER" layoutX="262.0" layoutY="103.0" prefHeight="30.0" prefWidth="215.0" promptText="Student Email" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
-            <Label fx:id="txtStudentJoined" alignment="CENTER" layoutX="524.0" layoutY="118.0" prefHeight="23.0" prefWidth="210.0" text="Joined Date" textFill="WHITE" />
+            <Label fx:id="txtStudentJoined" alignment="CENTER" layoutX="524.0" layoutY="118.0" prefHeight="23.0" prefWidth="210.0" textFill="WHITE" />
          </children>
       </Pane>
       <TableView fx:id="TableStudents" layoutX="49.0" layoutY="334.0" onMouseClicked="#rowOnMouseClicked" prefHeight="278.0" prefWidth="695.0">
         <columns>
-          <TableColumn fx:id="colStudentId" prefWidth="100.0" text="Id" />
-          <TableColumn fx:id="colStudentName" prefWidth="100.0" text="Name" />
+          <TableColumn fx:id="colStudentId" prefWidth="88.26668167114258" text="Id" />
+          <TableColumn fx:id="colStudentName" prefWidth="111.73332214355469" text="Name" />
             <TableColumn fx:id="colStudentAddress" prefWidth="100.0" text="Address" />
             <TableColumn fx:id="colStudentContact" prefWidth="100.0" text="Contact" />
-            <TableColumn fx:id="colStudentEmail" prefWidth="100.0" text="Email" />
-            <TableColumn fx:id="colStudentJoinDate" prefWidth="100.0" text="Joined Date" />
+            <TableColumn fx:id="colStudentEmail" prefWidth="129.86669921875" text="Email" />
+            <TableColumn fx:id="colStudentJoinDate" prefWidth="165.3333740234375" text="Joined Date" />
         </columns>
       </TableView>
       <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="930.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">

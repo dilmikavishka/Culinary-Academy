@@ -1,4 +1,4 @@
-package lk.ijse.BO.Impl;
+package lk.ijse.BO.custom.Impl;
 
 
 import lk.ijse.BO.custom.UserBO;

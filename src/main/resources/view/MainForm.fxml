@@ -19,17 +19,17 @@
                   <Font size="22.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="29.0" layoutY="363.0" prefHeight="60.0" prefWidth="275.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10; -fx-border-width: 2;" text="Courses" textFill="WHITE">
+            <JFXButton layoutX="29.0" layoutY="363.0" onAction="#btnCourseOnAction" prefHeight="60.0" prefWidth="275.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10; -fx-border-width: 2;" text="Courses" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="27.0" layoutY="459.0" prefHeight="60.0" prefWidth="275.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10; -fx-border-width: 2;" text="Registration" textFill="WHITE">
+            <JFXButton layoutX="27.0" layoutY="459.0" onAction="#btnRegistrationOnAction" prefHeight="60.0" prefWidth="275.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10; -fx-border-width: 2;" text="Registration" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="42.0" layoutY="658.0" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #E1C38E; -fx-background-radius: 10;" text="Log Out" textFill="WHITE">
+            <JFXButton layoutX="42.0" layoutY="658.0" onAction="#btnLogOutOnAction" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #E1C38E; -fx-background-radius: 10;" text="Log Out" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>

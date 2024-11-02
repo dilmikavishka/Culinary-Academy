@@ -39,22 +39,35 @@ public class StudentDaoImpl implements StudentDAO {
 
     @Override
     public Student search(String id) {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Student student = session.get(Student.class, id);
+        transaction.commit();
+        session.close();
+        return student;
     }
 
 
     @Override
     public String generateNewID() {
-            Session session = FactoryConfiguration.getInstance().getSession();
-            Transaction transaction = session.beginTransaction();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String nextId="";
 
-            Query query = session.createNativeQuery("SELECT student_id FROM Student ORDER BY student_id DESC LIMIT 1");
-            List results = query.getResultList();
+        Object student = session.createQuery("SELECT Student_ID FROM Student ORDER BY Student_ID DESC LIMIT 1").uniqueResult();
+        if (student!=null) {
+            String studentId = student.toString();
+            String prefix = "S";
+            String[] split = studentId.split(prefix);
+            int idNum = Integer.parseInt(split[1]);
+            nextId = prefix + String.format("%03d", ++idNum);
 
-            transaction.commit();
-            session.close();
-
-            return (results.isEmpty()) ? null : (String) results.get(0);
+        }else {
+            return "S001";
+        }
+        transaction.commit();
+        session.close();
+        return nextId;
 
 
     }

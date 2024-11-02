@@ -16,6 +16,9 @@ public class MainFormController {
     private boolean userAllowed;
     private boolean coursesAllowed;
 
+    private boolean studentAllowed;
+    private boolean registrationAllowed;
+
     @FXML
     private AnchorPane anpMain1;
 
@@ -32,25 +35,30 @@ public class MainFormController {
             switch (role){
                 case AdmissionsCoordinator:
                     userAllowed = false;
+                    studentAllowed = true;
                     coursesAllowed = true;
+                    registrationAllowed = true;
                     break;
                 case Admin:
                     userAllowed = true;
+                    studentAllowed = true;
                     coursesAllowed = true;
+                    registrationAllowed = true;
                     break;
                 default:
                     userAllowed = false;
+                    studentAllowed = false;
                     coursesAllowed = false;
+                    registrationAllowed = false;
             }
         }
-        System.out.println("userAllowed: " + userAllowed + ", coursesAllowed: " + coursesAllowed);
+        System.out.println("userAllowed: " + userAllowed + ", coursesAllowed: " + studentAllowed + ", coursesAllowed: " + coursesAllowed);
     }
 
 
     @FXML
     void txtDashBoardOnMouseClicked(MouseEvent event) throws IOException {
         loadDashboardForm();
-        System.out.println("awa");
     }
 
     public void initialize() throws IOException {
@@ -77,9 +85,9 @@ public class MainFormController {
 
     public void btnStudentOnAction(ActionEvent actionEvent) throws IOException {
         Alert alert;
-        if (coursesAllowed) {
+        if (studentAllowed) {
             alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Access granted to Courses section.");
+            alert.setContentText("Access granted to Student section.");
 
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/StudentForm.fxml"));
             AnchorPane studentFormPane = loader.load();
@@ -91,12 +99,60 @@ public class MainFormController {
             anpMain2.getChildren().add(studentFormPane);
         } else {
             alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Access denied to Courses section.");
+            alert.setContentText("Access denied to Student section.");
         }
         alert.show();
     }
 
+    @FXML
+    void btnCourseOnAction(ActionEvent event) throws IOException {
+        Alert alert;
+        if (coursesAllowed){
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Access granted to Courses section.");
 
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/CoursesForm.fxml"));
+            AnchorPane coursesFormAnp = loader.load();
+
+            CoursesFormController coursesFormController = loader.getController();
+            coursesFormController.setRolePermissions(currentRole);
+
+            anpMain2.getChildren().clear();
+            anpMain2.getChildren().add(coursesFormAnp);
+        }else {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Access denied to Courses section.");
+        }
+        alert.show();
+
+    }
+
+    @FXML
+    void btnLogOutOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnRegistrationOnAction(ActionEvent event) throws IOException {
+        Alert alert;
+        if (registrationAllowed){
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Access granted to Courses section.");
+
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/RegistrationForm.fxml"));
+            AnchorPane registrationFormAnp = loader.load();
+
+            RegistrationController registrationController = loader.getController();
+            registrationController.setRolePermissions(currentRole);
+
+            anpMain2.getChildren().clear();
+            anpMain2.getChildren().add(registrationFormAnp);
+        }else {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Access denied to Courses section.");
+        }
+        alert.show();
+    }
 
 }
 
