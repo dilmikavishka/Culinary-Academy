@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1020.0" style="-fx-background-color: #28282C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.RegistrationController">
+   <children>
+      <Pane layoutX="26.0" layoutY="110.0" prefHeight="628.0" prefWidth="971.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10px;">
+         <children>
+            <JFXComboBox fx:id="StudentComboBox" layoutX="262.0" layoutY="32.0" onAction="#RegStudentComboBoxOnAction" prefHeight="36.0" prefWidth="170.0" promptText="Student ID" style="-fx-background-color: #E4C590;" unFocusColor="WHITE" />
+            <JFXComboBox fx:id="CourseComboBox" layoutX="262.0" layoutY="100.0" onAction="#RegCourseComboBoxOnAction" prefHeight="36.0" prefWidth="170.0" promptText="Course ID" style="-fx-background-color: #E4C590;" unFocusColor="WHITE" />
+            <TextField fx:id="txtRegistrationId" alignment="CENTER" layoutX="26.0" layoutY="39.0" prefHeight="30.0" prefWidth="170.0" promptText="Registration ID" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtPaymentAmount" alignment="CENTER" layoutX="680.0" layoutY="36.0" prefHeight="30.0" prefWidth="170.0" promptText="PaymentAmount" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <JFXRadioButton fx:id="PaidOnAction" layoutX="876.0" layoutY="45.0" text="Paid" textFill="WHITE" />
+            <JFXRadioButton layoutX="876.0" layoutY="82.0" text="Unpaid" textFill="WHITE" />
+            <TextField fx:id="txtStudentName" alignment="CENTER" layoutX="475.0" layoutY="36.0" prefHeight="30.0" prefWidth="170.0" promptText="Student Name" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtCourseFee" alignment="CENTER" layoutX="478.0" layoutY="106.0" prefHeight="30.0" prefWidth="170.0" promptText="Coruse Fee" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtRegistrationDate" alignment="CENTER" layoutX="26.0" layoutY="105.0" prefHeight="30.0" prefWidth="170.0" promptText="Registration Date" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <JFXButton layoutX="690.0" layoutY="103.0" onAction="#SaveBtnOnaction" prefHeight="40.0" prefWidth="150.0" style="-fx-border-color: #FFB30E; -fx-border-width: 2px; -fx-border-radius: 6px;" text="Register" textFill="WHITE" />
+            <TableView fx:id="tblRegistration" layoutX="26.0" layoutY="238.0" prefHeight="339.0" prefWidth="815.0">
+              <columns>
+                <TableColumn fx:id="colRegistrationID" prefWidth="115.73331832885742" text="Reg ID" />
+                  <TableColumn fx:id="colRegistrationDate" prefWidth="115.73331832885742" text="Reg Date" />
+                  <TableColumn fx:id="colStudent" prefWidth="115.73331832885742" text="Student " />
+                  <TableColumn fx:id="colCourse" prefWidth="115.73331832885742" text="Course" />
+                  <TableColumn fx:id="colCourseFee" prefWidth="115.73331832885742" text="Coruse Fee" />
+                  <TableColumn fx:id="colPayment" prefWidth="115.73331832885742" text="Payment" />
+                  <TableColumn fx:id="colStatus" prefWidth="115.73331832885742" text="Status" />
+              </columns>
+            </TableView>
+            <JFXButton layoutX="28.0" layoutY="585.0" onAction="#StudentsWithCoursesBtnOnAction" prefHeight="30.0" prefWidth="452.0" style="-fx-border-color: #FFB30E; -fx-border-width: 2px; -fx-border-radius: 6px;" text="View students along with their enrolled courses" textFill="WHITE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
