@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="anpCourse" prefHeight="750.0" prefWidth="1020.0" style="-fx-background-color: #28282C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.CoursesFormController">
+   <children>
+      <Pane layoutX="16.0" layoutY="100.0" prefHeight="551.0" prefWidth="758.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10px;">
+         <children>
+            <TextField fx:id="txtCourseId" alignment="CENTER" layoutX="12.0" layoutY="38.0" prefHeight="30.0" prefWidth="215.0" promptText="Courses ID" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtCourseName" alignment="CENTER" layoutX="266.0" layoutY="36.0" prefHeight="30.0" prefWidth="215.0" promptText="Courses Name" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtCourseDuration" alignment="CENTER" layoutX="524.0" layoutY="37.0" prefHeight="30.0" prefWidth="215.0" promptText="Courses Duration" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtCourseFee" alignment="CENTER" layoutX="13.0" layoutY="105.0" prefHeight="30.0" prefWidth="215.0" promptText="Courses Fee" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+         </children>
+      </Pane>
+      <TableView fx:id="TableCourses" layoutX="47.0" layoutY="332.0" onMouseClicked="#rowOnMouseClicked" prefHeight="278.0" prefWidth="695.0">
+         <columns>
+            <TableColumn fx:id="colCoursesId" prefWidth="100.0" text="Id" />
+            <TableColumn fx:id="colCoursesName" prefWidth="314.6666717529297" text="Couse Name" />
+            <TableColumn fx:id="colCoursesDuration" prefWidth="118.39999389648438" text="Duration" />
+            <TableColumn fx:id="colCoursesFee" prefWidth="164.79998779296875" text="Course Fee" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="928.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/culinary%20logo%20copy.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="800.0" layoutY="141.0" onAction="#SaveBtnOnaction" prefHeight="40.0" prefWidth="150.0" style="-fx-border-color: #FFB30E; -fx-border-width: 2px; -fx-border-radius: 6px;" text="Save" textFill="WHITE" />
+      <JFXButton layoutX="800.0" layoutY="208.0" onAction="#UpdateBtnOnAction" prefHeight="40.0" prefWidth="150.0" style="-fx-border-color: #FFB30E; -fx-border-width: 2px; -fx-border-radius: 6px;" text="Update" textFill="WHITE" />
+      <JFXButton layoutX="801.0" layoutY="274.0" onAction="#DeleteBtnOnAction" prefHeight="40.0" prefWidth="150.0" style="-fx-border-color: #FFB30E; -fx-border-width: 2px; -fx-border-radius: 6px;" text="Delete" textFill="WHITE" />
+      <Text fill="#fcfcfd" layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses Management" wrappingWidth="457.3368225097656">
+         <font>
+            <Font name="Calibri Bold" size="29.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
