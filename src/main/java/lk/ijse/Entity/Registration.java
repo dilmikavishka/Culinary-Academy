@@ -34,3 +34,4 @@ public class Registration {
     private PaymentStatus paymentStatus;
     private String notes;
 }
+

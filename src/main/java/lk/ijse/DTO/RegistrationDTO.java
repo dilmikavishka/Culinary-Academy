@@ -1,8 +1,4 @@
 package lk.ijse.DTO;
-
-import jakarta.persistence.*;
-import lk.ijse.Entity.Courses;
-import lk.ijse.Entity.Student;
 import lk.ijse.Enum.PaymentStatus;
 import lombok.*;
 
@@ -21,5 +17,5 @@ public class RegistrationDTO {
     private LocalDate registrationDate;
     private BigDecimal paymentAmount;
     private PaymentStatus paymentStatus;
-    private String notes;
+
 }

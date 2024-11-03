@@ -18,7 +18,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Courses {
+public class
+Courses {
     @Id
     private String courseId;
     private String courseName;

@@ -120,7 +120,7 @@ public class CoursesFormController implements Initializable {
             );
             studentTmObservableList.add(coursesTm);
             TableCourses.setItems(studentTmObservableList);
-            System.out.println("Student Details: " + coursesTm);
+            System.out.println("Courses Details: " + coursesTm);
 
         }
     }

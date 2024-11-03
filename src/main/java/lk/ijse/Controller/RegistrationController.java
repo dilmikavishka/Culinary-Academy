@@ -6,11 +6,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import lk.ijse.BO.BoFactory;
 import lk.ijse.BO.custom.CoursesBO;
 import lk.ijse.BO.custom.RegistrationBO;
@@ -20,8 +24,10 @@ import lk.ijse.DTO.RegistrationDTO;
 import lk.ijse.DTO.StudentDto;
 import lk.ijse.Enum.PaymentStatus;
 import lk.ijse.Enum.Role;
+import lk.ijse.Tm.RegistrationTm;
 
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
@@ -70,7 +76,7 @@ public class RegistrationController implements Initializable {
     private TableColumn<?, ?> colStudent;
 
     @FXML
-    private TableView<?> tblRegistration;
+    private TableView<RegistrationTm> tblRegistration;
 
     public void SaveBtnOnaction(ActionEvent actionEvent) {
         Alert alert;
@@ -92,6 +98,7 @@ public class RegistrationController implements Initializable {
                 alert.setHeaderText("Registration Success");
                 alert.setContentText("Registration Success");
                 alert.showAndWait();
+
             } else {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registration Failed");
@@ -114,7 +121,39 @@ public class RegistrationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setStudentIds();
         setCourseIDs();
+        getAll();
         setRegistrationDate();
+        setCellValueFactory();
+    }
+
+    private void getAll() {
+        List<RegistrationDTO> registrationDTO = registrationBO.getAllRegistrations();
+        ObservableList<RegistrationTm> obList = FXCollections.observableArrayList();
+        System.out.println(registrationDTO);
+        for (RegistrationDTO dto : registrationDTO){
+            obList.add(
+                    new RegistrationTm(
+                            dto.getId(),
+                            dto.getStudent().getStudent_ID(),
+                            dto.getCourse().getCourseName(),
+                            dto.getRegistrationDate(),
+                            dto.getPaymentAmount(),
+                            dto.getPaymentStatus(),
+                            dto.getCourse().getFee()
+                    )
+            );
+            tblRegistration.setItems(obList);
+        }
+    }
+
+    private void setCellValueFactory(){
+        colRegistrationID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colRegistrationDate.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
+        colStudent.setCellValueFactory(new PropertyValueFactory<>("student"));
+        colCourse.setCellValueFactory(new PropertyValueFactory<>("course"));
+        colCourseFee.setCellValueFactory(new PropertyValueFactory<>("courseFee"));
+        colPayment.setCellValueFactory(new PropertyValueFactory<>("paymentAmount"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
     }
 
     private void setRegistrationDate() {
@@ -173,7 +212,11 @@ public class RegistrationController implements Initializable {
         txtCourseFee.setText(String.valueOf(coursesDto.getFee()));
     }
 
-    public void StudentsWithCoursesBtnOnAction(ActionEvent actionEvent) {
-
+    public void StudentsWithCoursesBtnOnAction(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/StudentsAlongCourseForm.fxml"))));
+        stage.show();
+        stage.centerOnScreen();
+        stage.setTitle("Student Along Course Form");
     }
 }

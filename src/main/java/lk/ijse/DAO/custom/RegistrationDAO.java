@@ -7,4 +7,9 @@ import java.util.List;
 
 public interface RegistrationDAO extends CrudDAO<Registration> {
     List<Object[]> getStudentsWithCourses();
+
+    List<Registration> getAllRegistrations();
+
+    List<String> getStudentsRegisteredForAllCourses();
+
 }
