@@ -16,9 +16,12 @@ import lk.ijse.BO.custom.UserBO;
 import lk.ijse.DTO.UserDto;
 import lk.ijse.Entity.User;
 import lk.ijse.Enum.Role;
+import lk.ijse.Regex.RegexFactory;
+import lk.ijse.Regex.RegexType;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class LoginFormController {
     UserBO  userBO = (UserBO) BoFactory.getBoFactory().getBO(BoFactory.BoType.USER);
@@ -42,6 +45,13 @@ public class LoginFormController {
     private TextField txtLogUserPassword;
 
 
+    RegexFactory regexFactory = RegexFactory.getInstance();
+
+    private static void validateField(String fieldName, String fieldValue, Pattern pattern) {
+        boolean matches = pattern.matcher(fieldValue).matches();
+        System.out.println(fieldName + " (" + fieldValue + ") validation: " + (matches ? "Valid" : "Invalid"));
+    }
+
     @FXML
     void btnLoginOnAction(ActionEvent event) throws IOException {
         String username = txtLogUserName.getText();
@@ -52,10 +62,19 @@ public class LoginFormController {
             UserDto authorizedUser = userBO.checkifUserExsist(username, password);
 
             if (authorizedUser != null) {
+                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/view/DashBoardForm.fxml"));
+                loader2.load();
+
+
+                DashBoardFormController dashboardFormController = loader2.getController();
+                dashboardFormController.setuserDetail(authorizedUser);
+
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainForm.fxml"));
                 Parent mainFormRoot = loader.load();
                 MainFormController mainFormController = loader.getController();
                 mainFormController.setRolePermissions(authorizedUser.getRole());
+                mainFormController.setuserDetail(authorizedUser);
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 stage.setScene(new Scene(mainFormRoot));
                 stage.show();

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anpUsers" prefHeight="750.0" prefWidth="1020.0" style="-fx-background-color: #28282C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.UserFormController">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="1020.0" layoutY="1.0" opacity="0.41" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/6219568006086903438.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="28.0" layoutY="112.0" prefHeight="551.0" prefWidth="758.0" style="-fx-border-color: #E1C38E; -fx-border-radius: 10px;">
+         <children>
+            <TextField fx:id="txtUserName" alignment="CENTER" layoutX="12.0" layoutY="38.0" prefHeight="30.0" prefWidth="215.0" promptText="User Name" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtUserRoll" alignment="CENTER" layoutX="266.0" layoutY="36.0" prefHeight="30.0" prefWidth="215.0" promptText="User Roll" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtUserEmail" alignment="CENTER" layoutX="524.0" layoutY="37.0" prefHeight="30.0" prefWidth="215.0" promptText="User Email" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+            <TextField fx:id="txtUserPassword" alignment="CENTER" layoutX="13.0" layoutY="105.0" prefHeight="30.0" prefWidth="215.0" promptText="User Password" style="-fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px; -fx-text-fill: #FDFCFC;" />
+         </children>
+      </Pane>
+      <TableView fx:id="tblUsers" layoutX="59.0" layoutY="289.0" onMouseClicked="#rowOnMouseClicked" prefHeight="333.0" prefWidth="695.0">
+         <columns>
+            <TableColumn fx:id="colUserName" prefWidth="117.60005569458008" text="User Name" />
+            <TableColumn fx:id="colUserRoll" prefWidth="135.99996948242188" text="User Roll" />
+            <TableColumn fx:id="colUserEmail" prefWidth="288.5332946777344" text="User Email" />
+            <TableColumn fx:id="colUserPassword" prefWidth="154.666748046875" text="User Password" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="940.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/culinary%20logo%20copy.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="812.0" layoutY="220.0" onAction="#UpdateBtnOnAction" prefHeight="40.0" prefWidth="150.0" style="-fx-border-color: #FFB30E; -fx-border-width: 2px; -fx-border-radius: 6px;" text="Update" textFill="WHITE" />
+      <JFXButton layoutX="813.0" layoutY="286.0" onAction="#DeleteBtnOnAction" prefHeight="40.0" prefWidth="150.0" style="-fx-border-color: #FFB30E; -fx-border-width: 2px; -fx-border-radius: 6px;" text="Delete" textFill="WHITE" />
+      <Text fill="#fcfcfd" layoutX="32.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users Management" wrappingWidth="457.3368225097656">
+         <font>
+            <Font name="Calibri Bold" size="29.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

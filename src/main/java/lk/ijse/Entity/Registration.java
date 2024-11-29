@@ -20,18 +20,19 @@ public class Registration {
     @Id
     private String id;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    //Registrations Student
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id", nullable = false)
     private Courses course;
-
     private LocalDate registrationDate;
     private BigDecimal paymentAmount;
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
     private String notes;
+    private BigDecimal  balanceToPay;
 }
 

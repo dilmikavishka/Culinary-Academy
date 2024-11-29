@@ -15,4 +15,10 @@ public interface UserService extends CrudDAO<User> {
     User checkifUserExsist(String username, String password);
 
     boolean isUsersExsistorNotDB();
+    
+    boolean updatePassword(String email, String confirmPassword);
+
+    boolean updateUser(User user);
+
+    List<User> getAllUser();
 }

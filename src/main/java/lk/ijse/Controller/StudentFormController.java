@@ -13,6 +13,8 @@ import lk.ijse.BO.custom.StudentBO;
 import lk.ijse.DTO.StudentDto;
 import lk.ijse.Entity.Student;
 import lk.ijse.Enum.Role;
+import lk.ijse.Regex.RegexFactory;
+import lk.ijse.Regex.RegexType;
 import lk.ijse.Tm.StudentTm;
 import org.hibernate.sql.results.graph.Initializer;
 
@@ -67,6 +69,51 @@ public class StudentFormController implements Initializable {
     @FXML
     private TableColumn<?, ?> colStudentName;
 
+    RegexFactory regexFactory = RegexFactory.getInstance();
+
+    private boolean validateInput() {
+        boolean isValid = true;
+        String name = txtStudentName.getText().trim();
+        String address = txtStudentAddress.getText().trim();
+        String contact = txtStudentContact.getText().trim();
+        String email = txtStudentEmail.getText().trim();
+
+        if (!regexFactory.getPattern(RegexType.EMAIL).matcher(email).matches()) {
+            txtStudentEmail.setStyle("-fx-text-fill: red; -fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px;");
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid email.(@gmail.com or @outlook.com)").show();
+            isValid = false;
+        } else {
+            txtStudentEmail.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px;");
+        }
+
+        if (!regexFactory.getPattern(RegexType.STUDENT_NAME).matcher(name).matches()) {
+            txtStudentName.setStyle("-fx-text-fill: red; -fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px;");
+            new Alert(Alert.AlertType.WARNING, " should contain only letters.").show();
+            isValid = false;
+        } else {
+            txtStudentName.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px;");
+        }
+
+        if (!regexFactory.getPattern(RegexType.ADDRESS).matcher(address).matches()) {
+            txtStudentAddress.setStyle("-fx-text-fill: red; -fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px;");
+            new Alert(Alert.AlertType.WARNING, "Address must have more than 5 characters").show();
+            isValid = false;
+        } else {
+            txtStudentAddress.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px;");
+        }
+
+        if (!regexFactory.getPattern(RegexType.PHONE_NUMBER).matcher(contact).matches()) {
+            txtStudentContact.setStyle("-fx-text-fill: red; -fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px;");
+            new Alert(Alert.AlertType.WARNING, "Phone Number must be 10 characters.").show();
+            isValid = false;
+        } else {
+            txtStudentContact.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-border-color: #FDFCFC; -fx-border-width: 0px 0px 1px 0px;");
+        }
+
+        return isValid;
+    }
+
+
     public void setRolePermissions(Role role) {
         this.currentRole = role;
         if (role != null){
@@ -92,7 +139,6 @@ public class StudentFormController implements Initializable {
     }
 
     private void clearFields() {
-        txtStudentId.setText("");
         txtStudentName.setText("");
         txtStudentAddress.setText("");
         txtStudentContact.setText("");
@@ -101,81 +147,104 @@ public class StudentFormController implements Initializable {
     }
 
     public void SaveBtnOnaction(ActionEvent actionEvent) {
-//        System.out.println(currentRole+"===========================");
-//        System.out.println("save clicked");
-        Alert alert;
-        if (saveStudent){
-            String id = txtStudentId.getText();
-            String name  = txtStudentName.getText();
-            String address = txtStudentAddress.getText();
-            String contact = txtStudentContact.getText();
-            String email = txtStudentEmail.getText();
-            LocalDate joinedDate = LocalDate.now();
-            StudentDto studentDto = new StudentDto(id, name, address, contact, email,joinedDate);
-            boolean issaved = studentBO.saveStudent(studentDto);
-            if (issaved){
+        if (validateInput()) {
+            Alert alert;
+            if (saveStudent) {
+                String id = txtStudentId.getText();
+                String name = txtStudentName.getText();
+                String address = txtStudentAddress.getText();
+                String contact = txtStudentContact.getText();
+                String email = txtStudentEmail.getText();
+                LocalDate joinedDate = LocalDate.now();
+                StudentDto studentDto = new StudentDto(id, name, address, contact, email, joinedDate);
+                boolean issaved = studentBO.saveStudent(studentDto);
+                if (issaved) {
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("Student Saved");
+                    alert.setContentText("Student Saved");
+                    alert.showAndWait();
+                    getAll();
+                    generateStudentNextId();
+                    clearFields();
+                }
+                System.out.println("granted");
                 alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("Student Saved");
-                alert.setContentText("Student Saved");
-                alert.showAndWait();
-                clearFields();
+                alert.setContentText("Access granted to Student section.");
+            } else {
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Access denied to Student section.");
             }
-            System.out.println("granted");
-            alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Access granted to Student section.");
-        } else {
-            alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Access denied to Student section.");
+            alert.show();
         }
-        alert.show();
     }
 
     public void UpdateBtnOnAction(ActionEvent actionEvent) {
-        Alert alert;
-        if (updateStudent){
-            String id = txtStudentId.getText();
-            String name  = txtStudentName.getText();
-            String address = txtStudentAddress.getText();
-            String contact = txtStudentContact.getText();
-            String email = txtStudentEmail.getText();
-            LocalDate joinedDate = LocalDate.now();
-            StudentDto studentDto = new StudentDto(id, name, address, contact, email,joinedDate);
-            boolean isUpdated = studentBO.updateStudent(studentDto);
-            if (isUpdated) {
+        if (validateInput()) {
+            Alert alert;
+            if (updateStudent) {
+                String id = txtStudentId.getText();
+                String name = txtStudentName.getText();
+                String address = txtStudentAddress.getText();
+                String contact = txtStudentContact.getText();
+                String email = txtStudentEmail.getText();
+                LocalDate joinedDate = LocalDate.now();
+                StudentDto studentDto = new StudentDto(id, name, address, contact, email, joinedDate);
+                boolean isUpdated = studentBO.updateStudent(studentDto);
+                if (isUpdated) {
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("Student Updated");
+                    alert.setContentText("Student Updated");
+                    alert.showAndWait();
+                    generateStudentNextId();
+                    getAll();
+                    clearFields();
+                }
                 alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("Student Updated");
-                alert.setContentText("Student Updated");
-                alert.showAndWait();
-                setCellValueFactory();
-                getAll();
+                alert.setContentText("Access granted to Student Update Privilege.");
+            } else {
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Access denied to  Student Update Privilege.");
             }
-            alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Access granted to Student Update Privilege.");
-        } else {
-            alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Access denied to  Student Update Privilege.");
+            alert.show();
         }
-        alert.show();
     }
 
     public void DeleteBtnOnAction(ActionEvent actionEvent) {
         Alert alert;
-        if (deleteStudent){
+        if (deleteStudent) {
             StudentTm selectedItem = TableStudents.getSelectionModel().getSelectedItem();
-            if (selectedItem != null){
-                boolean isDeleted = studentBO.deleteStudent(selectedItem.getStudent_ID());
-                if (isDeleted) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Student deleted!...").show();
-                    getAll();
-                    setCellValueFactory();
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Student not deleted   !...").show();
+
+            if (selectedItem != null) {
+                try {
+                    boolean isDeleted = studentBO.deleteStudent(selectedItem.getStudent_ID());
+
+                    if (isDeleted) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Student deleted successfully!").show();
+                        getAll();
+                        generateStudentNextId();
+                        clearFields();
+                        setCellValueFactory();
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete the student.").show();
+                    }
+                } catch (Exception e) {
+                    if (e.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
+                        new Alert(
+                                Alert.AlertType.ERROR,
+                                "Cannot delete this student as they are referenced in other records (e.g., course registrations)."
+                        ).show();
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "An unexpected error occurred: " + e.getMessage()).show();
+                    }
                 }
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Please select a student to delete!").show();
             }
+
             alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Access granted to  Student Delete Privilege.");
+            alert.setContentText("Access granted to Student Delete Privilege.");
         } else {
             alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Access denied to Student Delete Privilege.");
@@ -219,7 +288,7 @@ public class StudentFormController implements Initializable {
             );
             studentTmObservableList.add(studentTm);
             TableStudents.setItems(studentTmObservableList);
-            System.out.println("Student Details: " + studentTm);
+
         }
     }
 

@@ -1,6 +1,7 @@
 package lk.ijse.BO.custom;
 
 import lk.ijse.BO.SuperBO;
+import lk.ijse.DTO.FiveStuDto;
 import lk.ijse.DTO.RegistrationDTO;
 import lk.ijse.DTO.StudentCourseDTO;
 
@@ -13,5 +14,11 @@ public interface RegistrationBO extends SuperBO {
 
     List<StudentCourseDTO> getAllStudentsAlongTheirCourses();
 
-    List<String> getStudentsRegisteredForAllCourses();
+    List<FiveStuDto> getStudentsRegisteredForAllCourses();
+
+    boolean update(RegistrationDTO upregistrationDTO);
+
+    String generateNextIdRegistration();
+
+    boolean delete(String id);
 }

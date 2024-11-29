@@ -3,10 +3,7 @@ package lk.ijse.BO.custom.Impl;
 import lk.ijse.BO.custom.RegistrationBO;
 import lk.ijse.DAO.DaoFactory;
 import lk.ijse.DAO.custom.RegistrationDAO;
-import lk.ijse.DTO.CoursesDto;
-import lk.ijse.DTO.RegistrationDTO;
-import lk.ijse.DTO.StudentCourseDTO;
-import lk.ijse.DTO.StudentDto;
+import lk.ijse.DTO.*;
 import lk.ijse.Entity.Courses;
 import lk.ijse.Entity.Registration;
 import lk.ijse.Entity.Student;
@@ -23,6 +20,7 @@ public class RegistrationBoImpl implements RegistrationBO {
         registration.setRegistrationDate(registrationDTO.getRegistrationDate());
         registration.setPaymentAmount(registrationDTO.getPaymentAmount());
         registration.setPaymentStatus(registrationDTO.getPaymentStatus());
+        registration.setBalanceToPay(registrationDTO.getBalanceToPay());
         Student student = new Student();
         student.setStudent_ID(registrationDTO.getStudent().getStudent_ID());
         student.setStudent_Name(registrationDTO.getStudent().getStudent_Name());
@@ -31,6 +29,7 @@ public class RegistrationBoImpl implements RegistrationBO {
         student.setStudent_Address(registrationDTO.getStudent().getStudent_Address());
         student.setJoinedDate(registrationDTO.getStudent().getJoinedDate());
         registration.setStudent(student);
+
         Courses courses = new Courses();
         courses.setCourseId(registrationDTO.getCourse().getCourseId());
         courses.setCourseName(registrationDTO.getCourse().getCourseName());
@@ -50,6 +49,7 @@ public class RegistrationBoImpl implements RegistrationBO {
             registrationDTO.setRegistrationDate(registration.getRegistrationDate());
             registrationDTO.setPaymentAmount(registration.getPaymentAmount());
             registrationDTO.setPaymentStatus(registration.getPaymentStatus());
+            registrationDTO.setBalanceToPay(registration.getBalanceToPay());
             StudentDto student = new StudentDto();
             student.setStudent_ID(registration.getStudent().getStudent_ID());
             student.setStudent_Name(registration.getStudent().getStudent_Name());
@@ -84,7 +84,48 @@ public class RegistrationBoImpl implements RegistrationBO {
     }
 
     @Override
-    public List<String> getStudentsRegisteredForAllCourses() {
-        return null;
+    public List<FiveStuDto> getStudentsRegisteredForAllCourses() {
+        List<String> studentIds = registrationDAO.getStudentsRegisteredForAllCourses();
+        List<FiveStuDto> fiveStuDtos = new ArrayList<>();
+        for (String studentId : studentIds) {
+            fiveStuDtos.add(new FiveStuDto(studentId));
+        }
+        return fiveStuDtos;
+    }
+
+    @Override
+    public boolean update(RegistrationDTO upregistrationDTO) {
+        Registration registration = new Registration();
+        registration.setId(upregistrationDTO.getId());
+        registration.setRegistrationDate(upregistrationDTO.getRegistrationDate());
+        registration.setPaymentAmount(upregistrationDTO.getPaymentAmount());
+        registration.setPaymentStatus(upregistrationDTO.getPaymentStatus());
+        registration.setBalanceToPay(upregistrationDTO.getBalanceToPay());
+        Student student = new Student();
+        student.setStudent_ID(upregistrationDTO.getStudent().getStudent_ID());
+        student.setStudent_Name(upregistrationDTO.getStudent().getStudent_Name());
+        student.setStudent_Phone(upregistrationDTO.getStudent().getStudent_Phone());
+        student.setStudent_Email(upregistrationDTO.getStudent().getStudent_Email());
+        student.setStudent_Address(upregistrationDTO.getStudent().getStudent_Address());
+        student.setJoinedDate(upregistrationDTO.getStudent().getJoinedDate());
+        registration.setStudent(student);
+
+        Courses courses = new Courses();
+        courses.setCourseId(upregistrationDTO.getCourse().getCourseId());
+        courses.setCourseName(upregistrationDTO.getCourse().getCourseName());
+        courses.setDuration(upregistrationDTO.getCourse().getDuration());
+        courses.setFee(upregistrationDTO.getCourse().getFee());
+        registration.setCourse(courses);
+        return  registrationDAO.update(registration);
+    }
+
+    @Override
+    public String generateNextIdRegistration() {
+        return registrationDAO.generateNewId();
+    }
+
+    @Override
+    public boolean delete(String id) {
+        return registrationDAO.delete(id);
     }
 }

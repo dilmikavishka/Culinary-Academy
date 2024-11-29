@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="anpDashBoard" prefHeight="750.0" prefWidth="1020.0" style="-fx-background-color: #28282C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.DashBoardFormController">
    <children>
+      <ImageView fitHeight="750.0" fitWidth="1020.0" layoutX="-1.0" layoutY="-1.0" opacity="0.41" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/6219568006086903338.jpg" />
+         </image>
+      </ImageView>
       <Text fill="#e1c38e" layoutX="29.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Culinary">
          <font>
             <Font name="Arial Black" size="37.0" />
@@ -20,7 +30,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <LineChart fx:id="lineChart" layoutX="23.0" layoutY="333.0" prefHeight="398.0" prefWidth="499.0">
+      <LineChart fx:id="lineChart" layoutX="67.0" layoutY="333.0" prefHeight="398.0" prefWidth="499.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -35,7 +45,10 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Label fx:id="lblStudent" layoutX="139.0" layoutY="35.0" />
+            <Label fx:id="lblStudent" layoutX="140.0" layoutY="25.0" prefHeight="18.0" prefWidth="10.0" textFill="#e1c38e">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="313.0" layoutY="220.0" prefHeight="86.0" prefWidth="216.0" style="-fx-background-color: #fdfcfc; -fx-background-radius: 5px;">
@@ -45,19 +58,68 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Label fx:id="lblCourses" layoutX="143.0" layoutY="35.0" />
+            <Label fx:id="lblCourses" layoutX="141.0" layoutY="25.0" prefHeight="18.0" prefWidth="10.0" textFill="#e1c38e">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="555.0" layoutY="222.0" prefHeight="86.0" prefWidth="216.0" style="-fx-background-color: #fdfcfc; -fx-background-radius: 5px;">
+      <AnchorPane layoutX="555.0" layoutY="222.0" prefHeight="86.0" prefWidth="233.0" style="-fx-background-color: #fdfcfc; -fx-background-radius: 5px;">
          <children>
             <Text fill="#e1c38e" layoutX="20.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration :">
                <font>
                   <Font size="25.0" />
                </font>
             </Text>
-            <Label fx:id="lblRegistration" layoutX="174.0" layoutY="38.0" />
+            <Label fx:id="lblRegistration" layoutX="175.0" layoutY="25.0" prefHeight="36.0" prefWidth="43.0" textFill="#e1c38e">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="67.0" layoutY="110.0" prefHeight="76.0" prefWidth="730.0" style="-fx-background-color: #e1c38e; -fx-background-radius: 20px 0px 20px 0px;" />
+      <AnchorPane layoutX="67.0" layoutY="110.0" opacity="0.86" prefHeight="76.0" prefWidth="704.0" style="-fx-background-color: #e1c38e; -fx-background-radius: 20px 0px 20px 0px;">
+         <children>
+            <Text fx:id="DashDay" fill="WHITE" layoutX="177.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Every Dish Tells Its Story">
+               <font>
+                  <Font name="Arial" size="30.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+      <Pane layoutX="600.0" layoutY="332.0" prefHeight="380.0" prefWidth="386.0" style="-fx-border-color: E1C38E; -fx-border-radius: 10px;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="19.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/6212880003272659439%20(1).jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="214.0" layoutY="27.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../image/6212880003272659445.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="SW_RESIZE" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="20.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/6212880003272659447%20(1).jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="215.0" layoutY="206.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../image/6212880003272659443%20(2).jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="SW_RESIZE" />
+               </cursor>
+            </ImageView>
+            <Line endX="100.0" layoutX="192.0" layoutY="192.0" startX="-100.0" stroke="#e1c38e" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="137.0" fitWidth="130.0" layoutX="856.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/culinary%20logo%20copy.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

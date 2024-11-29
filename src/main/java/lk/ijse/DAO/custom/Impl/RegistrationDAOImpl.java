@@ -23,12 +23,23 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 
     @Override
     public boolean update(Registration entity) {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.merge(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean delete(String id) {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Registration registration = session.get(Registration.class, id);
+        session.remove(registration);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
@@ -85,4 +96,41 @@ public class RegistrationDAOImpl implements RegistrationDAO {
         session.close();
         return studentIds;
     }
+
+    @Override
+    public String generateNewId() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String nextId = "";
+
+        try {
+            Object course = session.createQuery("SELECT id FROM Registration ORDER BY id DESC")
+                    .setMaxResults(1)
+                    .uniqueResult();
+            if (course != null) {
+                String courseId = course.toString();
+                String prefix = "R";
+                if (courseId.startsWith(prefix)) {
+                    String numericPart = courseId.substring(prefix.length());
+                    try {
+                        int idNum = Integer.parseInt(numericPart);
+                        nextId = prefix + String.format("%03d", ++idNum);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error parsing course ID number: " + e.getMessage());
+                        nextId = prefix + "001";
+                    }
+                } else {
+                    nextId = prefix + "001";
+                }
+            } else {
+                nextId = "R001";
+            }
+        } finally {
+            transaction.commit();
+            session.close();
+        }
+        return nextId;
+    }
+
+
 }

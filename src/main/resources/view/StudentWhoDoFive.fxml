@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.StudentWhodoFive">
+   <children>
+      <TableView fx:id="fiveCoursetable" layoutX="37.0" layoutY="62.0" prefHeight="315.0" prefWidth="245.0">
+        <columns>
+          <TableColumn fx:id="StudentID" prefWidth="244.0" text="Student ID" />
+        </columns>
+      </TableView>
+      <Text layoutX="47.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Who are doing all courses" />
+   </children>
+</AnchorPane>

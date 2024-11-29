@@ -12,4 +12,6 @@ public interface RegistrationDAO extends CrudDAO<Registration> {
 
     List<String> getStudentsRegisteredForAllCourses();
 
+    String generateNewId();
+
 }

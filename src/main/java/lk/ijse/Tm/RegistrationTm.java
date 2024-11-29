@@ -23,4 +23,5 @@ public class RegistrationTm {
     private BigDecimal paymentAmount;
     private PaymentStatus paymentStatus;
     private double courseFee;
+    private BigDecimal  balanceToPay;
 }

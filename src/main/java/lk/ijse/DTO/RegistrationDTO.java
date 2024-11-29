@@ -17,5 +17,6 @@ public class RegistrationDTO {
     private LocalDate registrationDate;
     private BigDecimal paymentAmount;
     private PaymentStatus paymentStatus;
+    private BigDecimal  balanceToPay;
 
 }

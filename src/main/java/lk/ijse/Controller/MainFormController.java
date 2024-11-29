@@ -3,16 +3,23 @@ package lk.ijse.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import lk.ijse.DTO.UserDto;
 import lk.ijse.Enum.Role;
 
 import java.io.IOException;
 
 public class MainFormController {
     private Role currentRole;
+
+    private UserDto user;
+
     private boolean userAllowed;
     private boolean coursesAllowed;
 
@@ -27,6 +34,11 @@ public class MainFormController {
 
     @FXML
     private Text txtDashBoard;
+
+    public void setuserDetail(UserDto authorizedUser) {
+        this.user = authorizedUser;
+
+    }
 
     public void setRolePermissions(Role role) {
         this.currentRole = role;
@@ -66,16 +78,30 @@ public class MainFormController {
     }
 
     private void loadDashboardForm() throws IOException {
-        AnchorPane dashboardPane = FXMLLoader.load(this.getClass().getResource("/view/DashBoardForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/DashBoardForm.fxml"));
+        AnchorPane dashboardPane = loader.load();
+
+        DashBoardFormController dashboardController = loader.getController();
+
+
         anpMain2.getChildren().clear();
         anpMain2.getChildren().add(dashboardPane);
     }
 
-    public void btnUserOnAction(ActionEvent actionEvent) {
+    public void btnUserOnAction(ActionEvent actionEvent) throws IOException {
         Alert alert;
         if (userAllowed){
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Access granted to User section.");
+
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/UserForm.fxml"));
+            AnchorPane userFormPane = loader.load();
+
+            UserFormController userFormController = loader.getController();
+            userFormController.setRolePermissions(currentRole);
+
+            anpMain2.getChildren().clear();
+            anpMain2.getChildren().add(userFormPane);
         } else {
             alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Access denied to User section.");
@@ -129,7 +155,7 @@ public class MainFormController {
 
     @FXML
     void btnLogOutOnAction(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @FXML
@@ -153,6 +179,8 @@ public class MainFormController {
         }
         alert.show();
     }
+
+
 
 }
 
